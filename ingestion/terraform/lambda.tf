@@ -7,29 +7,29 @@
 # ---------------------------------------------------------------------------
 resource "null_resource" "build_ingest_lambda" {
   triggers = {
-    requirements_hash = filemd5("${path.module}/../ingest_lambda/requirements.txt")
-    handler_hash      = filemd5("${path.module}/../ingest_lambda/handler.py")
+    requirements_hash = filemd5("${path.module}/../lambda/requirements.txt")
+    handler_hash      = filemd5("${path.module}/../lambda/handler.py")
   }
 
   provisioner "local-exec" {
     command = <<-EOF
       set -e
       echo "==> Cleaning previous build..."
-      rm -rf "${path.module}/../ingest_lambda/package"
-      mkdir -p "${path.module}/../ingest_lambda/package"
+      rm -rf "${path.module}/../lambda/package"
+      mkdir -p "${path.module}/../lambda/package"
 
       echo "==> Installing dependencies (manylinux wheels for Lambda runtime)..."
       pip install \
         --platform manylinux2014_x86_64 \
-        --target "${path.module}/../ingest_lambda/package" \
+        --target "${path.module}/../lambda/package" \
         --implementation cp \
         --python-version 3.11 \
         --only-binary=:all: \
-        -r "${path.module}/../ingest_lambda/requirements.txt"
+        -r "${path.module}/../lambda/requirements.txt"
 
       echo "==> Copying handler..."
-      cp "${path.module}/../ingest_lambda/handler.py" \
-         "${path.module}/../ingest_lambda/package/"
+      cp "${path.module}/../lambda/handler.py" \
+         "${path.module}/../lambda/package/"
       echo "==> Build complete."
     EOF
   }
@@ -38,8 +38,8 @@ resource "null_resource" "build_ingest_lambda" {
 data "archive_file" "ingest_lambda_zip" {
   depends_on  = [null_resource.build_ingest_lambda]
   type        = "zip"
-  source_dir  = "${path.module}/../ingest_lambda/package"
-  output_path = "${path.module}/../ingest_lambda/lambda.zip"
+  source_dir  = "${path.module}/../lambda/package"
+  output_path = "${path.module}/../lambda/lambda.zip"
 }
 
 # Upload zip to S3 to avoid the 50 MB direct-upload limit

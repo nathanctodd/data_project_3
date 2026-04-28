@@ -12,7 +12,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-TERRAFORM_DIR="${REPO_ROOT}/terraform"
+TERRAFORM_DIR="${REPO_ROOT}/ingestion/terraform"
 CHALICE_DIR="${REPO_ROOT}/api"
 CONFIG_FILE="${CHALICE_DIR}/.chalice/config.json"
 

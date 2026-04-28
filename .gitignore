@@ -1,13 +1,13 @@
 # Terraform
-terraform/.terraform/
-terraform/.terraform.lock.hcl
-terraform/*.tfstate
-terraform/*.tfstate.backup
-terraform/*.tfstate.*.backup
+ingestion/terraform/.terraform/
+ingestion/terraform/.terraform.lock.hcl
+ingestion/terraform/*.tfstate
+ingestion/terraform/*.tfstate.backup
+ingestion/terraform/*.tfstate.*.backup
 
 # Lambda build artifacts
-ingest_lambda/package/
-ingest_lambda/lambda.zip
+ingestion/lambda/package/
+ingestion/lambda/lambda.zip
 
 # Chalice deployment output
 api/.chalice/deployed/

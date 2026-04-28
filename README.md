@@ -1,5 +1,14 @@
 # DS5220 Data Project 3 — Bitcoin Price Tracker
 
+## Sub-projects
+
+| Sub-project | Link |
+|---|---|
+| Data Ingestion Pipeline | [ingestion/](ingestion/) |
+| Integration API | [api/](api/) |
+
+---
+
 ## Data Source
 
 **CoinGecko Free API** — fetches Bitcoin (BTC) price in USD plus 24-hour change percentage, market cap, and trading volume. No API key required.
