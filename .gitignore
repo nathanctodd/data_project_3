@@ -1,0 +1,26 @@
+# Terraform
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/*.tfstate.*.backup
+
+# Lambda build artifacts
+ingest_lambda/package/
+ingest_lambda/lambda.zip
+
+# Chalice deployment output
+api/.chalice/deployed/
+api/.chalice/deployments/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# macOS
+.DS_Store
